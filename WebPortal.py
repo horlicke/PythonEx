@@ -6,7 +6,9 @@ from applitools.eyes import Eyes
 import time
 
 debug = False
+############################################################
 ### Parent portal class
+############################################################
 class Portal:
     def __init__(self, browser, product, url):
         self.browser = browser
