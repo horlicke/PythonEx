@@ -46,6 +46,7 @@ def testSetup():
     _webPortal.openLoginScreen()                                             #Navigate to login screen
     print("****** Begin Test(s) ******")
     _webPortal.Login(_testdata.CLIENT_USERNAME, _testdata.CLIENT_PASSWORD)
+    _framework.sleep(10)
 
 ##############################################################################################
 #  testTeardown()
@@ -53,6 +54,7 @@ def testSetup():
 #
 ##############################################################################################
 def testTearDown():
+    _framework.sleep(10)
     _webPortal.closeWebdriver()
     print("\n\r*************** Total Tests Run: " + str(_results.getTotalRun()) + ", Total Passed: " + str(_results.getTotalPassed()) + ", Total Failed: " + str(_results.getTotalFailed()) + " ***************")
     _framework.sleep(5)
@@ -69,9 +71,18 @@ def testTearDown():
 #     Other input as needed
 #
 ##############################################################################################
+def testClickingReportsButtonTakesUserToReportsPage(testCaseID, outputMessage):
+    _webPortal.GoToReportsPage()
+    _results.assertTrue((_webPortal.OnClientReportsPage()), testCaseID, testClickingReportsButtonTakesUserToReportsPage.__name__ , fileName, outputMessage)
+
+
 def testClickingStatusButtonTakesUserToStatusPage(testCaseID, outputMessage):
     _webPortal.GoToStatusPage()
-    _results.assertTrue((_webPortal.OnLandingPage("client")), testCaseID, testClickingStatusButtonTakesUserToStatusPage.__name__ , fileName, outputMessage)
+    _results.assertTrue((_webPortal.OnClientStatusPage()), testCaseID, testClickingStatusButtonTakesUserToStatusPage.__name__ , fileName, outputMessage)
+
+def testClickingStatusButtonTakesUserToPrintStreamPage(testCaseID, outputMessage):
+    _webPortal.GoToPrintStreamPage()
+    _results.assertTrue((_webPortal.OnClientPrintStreamPage()), testCaseID, testClickingStatusButtonTakesUserToPrintStreamPage.__name__ , fileName, outputMessage)
 
 
 ##############################################################################################
@@ -80,7 +91,8 @@ def testClickingStatusButtonTakesUserToStatusPage(testCaseID, outputMessage):
 #
 ##############################################################################################
 testSetup()
-
+testClickingReportsButtonTakesUserToReportsPage(78837, "Username: %s and password: %s" % (_testdata.CLIENT_USERNAME, _testdata.CLIENT_PASSWORD) )
 testClickingStatusButtonTakesUserToStatusPage(78836, "Username: %s and password: %s" % (_testdata.CLIENT_USERNAME, _testdata.CLIENT_PASSWORD) )
+testClickingStatusButtonTakesUserToPrintStreamPage(78836, "Username: %s and password: %s" % (_testdata.CLIENT_USERNAME, _testdata.CLIENT_PASSWORD) )
 
 testTearDown()

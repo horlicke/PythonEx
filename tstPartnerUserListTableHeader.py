@@ -42,7 +42,7 @@ def testSetup():
     _webPortal = _framework.assignPortalAndBrowser(_testdata.PORTAL_URL)     #use for web portal testing to setup webdriver, url and product-specific web page locators
 
     _webPortal.openLoginScreen()                                             #Navigate to login screen
-    _webPortal.Login(_testdata.ADMIN_USERNAME, _testdata.ADMIN_PASSWORD)
+    _webPortal.Login(_testdata.PARTNER_USERNAME, _testdata.PARTNER_PASSWORD)
     _framework.sleep(5)
     _webPortal.GoToUsersListPage()
     _framework.sleep(3)
@@ -83,26 +83,20 @@ def testRoleDropdownOptionsAdmin(testCaseID, outputMessage):
     _framework.sleep(3)
     _webPortal.ClickRoleDropdown()
     _framework.sleep(3)
-    textSelectRole, textAdmin, textPartner, textClient = _webPortal.GetDropDownOptionTextAdmin()
+    textSelectRole, textPartner, textClient = _webPortal.GetDropDownOptionTextAdminP()
     _results.assertTrue(((textSelectRole == _testdata.USER_ROLE_SELECT_ROLE_TEXT) and
-                         (textAdmin == _testdata.USER_ROLE_ADMIN_TEXT) and
                          (textPartner == _testdata.USER_ROLE_PARTNER_TEXT) and
                          (textClient == _testdata.USER_ROLE_CLIENT_TEXT) ),
                         testCaseID, testRoleDropdownOptionsAdmin.__name__ , fileName, outputMessage)
 
-
-def testClickingStatusButtonTakesUserToStatusPage(testCaseID, outputMessage):
-    _webPortal.SelectRole("admin")
-    #_results.assertTrue((_webPortal.OnStatusPage("client")), testCaseID, testClickingStatusButtonTakesUserToStatusPage.__name__ , fileName, outputMessage)
-
-def testAdmminUserListingTableHeader(testCaseID, outputMessage):
-    _webPortal.SelectRoleP("admin")
-    _results.assertTrue((_webPortal.TableHeaderIsCorrect("admin") and
+def testPartnerUserListingTableHeader(testCaseID, outputMessage):
+    _webPortal.SelectRoleP("partner")
+    _results.assertTrue((_webPortal.TableHeaderIsCorrect("partner") and
                          _webPortal.AddUserButtonDisplays("Add User")
                          ),
-                         testCaseID, testAdmminUserListingTableHeader.__name__ , fileName, outputMessage)
+                         testCaseID, testPartnerUserListingTableHeader.__name__ , fileName, outputMessage)
 
-def testAdminUserListingColumnHeaders(testCaseID, outputMessage):
+def testPartnerUserListingColumnHeaders(testCaseID, outputMessage):
     _results.assertTrue((_webPortal.ListTableFirstNameColumnHeaderIsCorrect(_testdata.USER_LIST_First_Name_Header) and
                          _webPortal.ListTableLastNameColumnHeaderIsCorrect(_testdata.USER_LIST_Last_Name_Header) and
                          _webPortal.ListTableUserNameColumnHeaderIsCorrect(_testdata.USER_LIST_User_Name_Header) and
@@ -111,7 +105,16 @@ def testAdminUserListingColumnHeaders(testCaseID, outputMessage):
                          _webPortal.ListTableEmailColumnHeaderIsCorrect(_testdata.USER_LIST_Email_Header) and
                          _webPortal.ListTableBlankColumnHeaderIsCorrect("")
                          ),
-                         testCaseID, testAdminUserListingColumnHeaders.__name__ , fileName, outputMessage)
+                         testCaseID, testPartnerUserListingColumnHeaders.__name__ , fileName, outputMessage)
+
+
+
+
+
+def testClickingStatusButtonTakesUserToStatusPage(testCaseID, outputMessage):
+    _webPortal.SelectRole("admin")
+    #_results.assertTrue((_webPortal.OnStatusPage("client")), testCaseID, testClickingStatusButtonTakesUserToStatusPage.__name__ , fileName, outputMessage)
+
 
 ##############################################################################################
 #  Main entry: Execute setup, test methods and teardown
@@ -120,8 +123,8 @@ def testAdminUserListingColumnHeaders(testCaseID, outputMessage):
 ##############################################################################################
 testSetup()
 
-testGoButtonIsNotEnabledOnInitialLoadOfUserListPage(77601, "Username: %s and password: %s" % (_testdata.ADMIN_USERNAME, _testdata.ADMIN_USERNAME))
-testRoleDropdownOptionsAdmin(77609, "Username: %s and password: %s" % (_testdata.ADMIN_USERNAME, _testdata.ADMIN_USERNAME) )
-testAdmminUserListingTableHeader(77777, "Username: %s and password: %s" % (_testdata.ADMIN_USERNAME, _testdata.ADMIN_USERNAME))
-testAdminUserListingColumnHeaders(77777, "Username: %s and password: %s" % (_testdata.ADMIN_USERNAME, _testdata.ADMIN_USERNAME))
+testGoButtonIsNotEnabledOnInitialLoadOfUserListPage(77615, "Username: %s and password: %s" % (_testdata.PARTNER_USERNAME, _testdata.PARTNER_PASSWORD))
+testRoleDropdownOptionsAdmin(77622, "Username: %s and password: %s" % (_testdata.PARTNER_USERNAME, _testdata.PARTNER_PASSWORD) )
+testPartnerUserListingTableHeader(77777, "Username: %s and password: %s" % (_testdata.PARTNER_USERNAME, _testdata.PARTNER_PASSWORD))
+testPartnerUserListingColumnHeaders(77777, "Username: %s and password: %s" % (_testdata.PARTNER_USERNAME, _testdata.PARTNER_PASSWORD))
 testTearDown()

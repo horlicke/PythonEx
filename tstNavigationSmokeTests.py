@@ -59,20 +59,36 @@ def testTearDown():
 def testBasicNavigationClientUser(testCaseID, outputMessage):
         everythingPassed = True
         _eyes.check_window('Login Page')
+        _framework.sleep(3)
         _webPortal.Login(_testdata.ADMIN_USERNAME, _testdata.ADMIN_PASSWORD)
+        print("Logged in...")
+        _framework.sleep(15)
         _eyes.check_window('Admin Landing Page')
         _webPortal.HoverOverUsersButtonInNavBar()
-        _framework.sleep(3)
-        _eyes.check_window('Users Hover')
+        #_eyes.check_window('Users Hover')
+        print("Starting hover..")
+        _framework.sleep(20)
         _webPortal.GoToUsersPage()
+        print("Starting UN hover..")
+        _webPortal.UnHover()
+        _framework.sleep(20)
         _eyes.check_window('Users Page')
+
+        _webPortal.HoverOverSitesButtonInNavBar()
+        _framework.sleep(20)
         _webPortal.GoToSitesPage()
+        _webPortal.UnHover()
+        _framework.sleep(20)
         _eyes.check_window('Sites Page')
+
         _webPortal.GoToReportsPage()
+        _framework.sleep(10)
         _eyes.check_window('Reports Page')
         _webPortal.GoToStatusPage()
+        _framework.sleep(10)
         _eyes.check_window('Status Page')
         _webPortal.GoToSearchPage()
+        _framework.sleep(10)
         _eyes.check_window('Search Page')
 
     # End visual testing. Validate visual correctness.

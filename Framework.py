@@ -16,7 +16,7 @@ from pprint import pprint
 
 
 debug = False
-verbose = False
+verbose = True
 
 ##############################################################################################
 #  Framework class
@@ -54,15 +54,15 @@ class FW:
 #
 ##############################################################################################
     def connectToDB(self, dbUser, dbHost, dbName, dbPW):
-        self.dbInstance = DB_Manager.Database(dbUser, dbHost, dbName, dbPW)
+        self.dbInstance = DB_Manager.Database(dbUser, dbHost, dbName, dbPW, "SQL Server")   #hardcoded for SQL Server dbms for now, fix in future
 
     def sqlQuery(self, query):
-        self.dbInstance.executeSQL(query)
+        return self.dbInstance.executeSQL(query)
 
     def sqlQueryAndCloseConnection(self, query):
         return self.dbInstance.executeSQLAndCloseConnection(query)   #return response to query
 
-    def closeConnection(self, query):
+    def closeDBConnection(self):
         self.dbInstance.close()
     ##########    End database/sql methods
 
